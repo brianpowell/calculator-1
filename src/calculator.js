@@ -2,27 +2,27 @@ var displayField;
 
 $(document).ready(function() {
     displayField = $('#display')
-    $("button").bind('tap', function() {
-        buttonPressed()
-    })
+    $("button").bind('click', buttonPressed);
 })
 
 function buttonPressed() {
-    var buttonText = event.target.innerText
-
+    var buttonText = $(this).text();
+            //console.log("Pressed: "+buttonText);
     if (isCompute(buttonText)) {
         compute()
     } else if (isClear(buttonText)) {
         clear()
     } else if (isBackSpace(buttonText)) {
         backSpace()
+    } else if (isTests(buttonText)) {
+        runTests()
     } else {
         display(buttonText)
     }
 }
 
 function isClear(buttonText) {
-    return "C" == buttonText
+    return "Clear" == buttonText
 }
 
 function isBackSpace(buttonText) {
@@ -31,6 +31,10 @@ function isBackSpace(buttonText) {
 
 function isCompute(buttonText) {
     return "=" == buttonText
+}
+
+function isTests(buttonText) {
+    return "Run Tests" == buttonText
 }
 
 function display(buttonText) {

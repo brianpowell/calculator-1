@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="cache.manifest">
+<html>
 <head>
     <meta charset="utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -9,6 +9,15 @@
     <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
     <script src="calculator.js"></script>
+    <script src="tests.js"></script>
+    <script src="jquery.simulate.js"></script>
+    <style>
+        body{ width: 320px;}
+        .hide {opacity: .01;}
+        .tests { padding: 10px 0 0 10px; border-bottom; 1px solid #666;}
+        .correct {color: #009900; font-weight: bold;}
+        .wrong {color: #FF0000; font-weight: bold;}
+    </style>
 </head>
 <body>
 <div data-role="page" data-theme="b" id="simple-calculator">
@@ -18,66 +27,69 @@
     </div>
     <fieldset class="ui-grid-c">
         <div class="ui-block-a">
-            <button type="button">7</button>
+            <button id="b7" type="button">7</button>
         </div>
         <div class="ui-block-b">
-            <button type="button">8</button>
+            <button id="b8" type="button">8</button>
         </div>
         <div class="ui-block-c">
-            <button type="button">9</button>
+            <button id="b9" type="button">9</button>
         </div>
         <div class="ui-block-d">
-            <button type="button" data-theme="b">+</button>
+            <button id="bplus" type="button" data-theme="b">+</button>
         </div>
         <div class="ui-block-a">
-            <button type="button">4</button>
+            <button id="b4" type="button">4</button>
         </div>
         <div class="ui-block-b">
-            <button type="button">5</button>
+            <button id="b5" type="button">5</button>
         </div>
         <div class="ui-block-c">
-            <button type="button">6</button>
+            <button id="b6" type="button">6</button>
         </div>
         <div class="ui-block-d">
-            <button type="button" data-theme="b">-</button>
+            <button id="bminus" type="button" data-theme="b">-</button>
         </div>
         <div class="ui-block-a">
-            <button type="button">1</button>
+            <button id="b1" type="button">1</button>
         </div>
         <div class="ui-block-b">
-            <button type="button">2</button>
+            <button id="b2" type="button">2</button>
         </div>
         <div class="ui-block-c">
-            <button type="button">3</button>
+            <button id="b3" type="button">3</button>
         </div>
         <div class="ui-block-d">
-            <button type="button" data-theme="b">*</button>
+            <button id="bmultiply" type="button" data-theme="b">*</button>
         </div>
-        <div class="ui-block-a">
+        <div class="ui-block-a hide">
             <button type="button">(</button>
         </div>
         <div class="ui-block-b">
-            <button type="button">0</button>
+            <button id="b0" type="button">0</button>
         </div>
-        <div class="ui-block-c">
+        <div class="ui-block-c hide">
             <button type="button">)</button>
         </div>
         <div class="ui-block-d">
-            <button type="button" data-theme="b">/</button>
+            <button id="bdivide" type="button" data-theme="b">/</button>
         </div>
         <div class="ui-block-a">
-            <button type="button" data-theme="e">C</button>
+            <button id="bclear" type="button" data-theme="e">Clear</button>
         </div>
         <div class="ui-block-b">
-            <button type="button">.</button>
+            <button id="bpoint" type="button">.</button>
         </div>
         <div class="ui-block-c">
-            <button type="button" data-theme="e">&#x21D0;</button>
+            <button id="bdelete" type="button" data-theme="e">&#x21D0;</button>
         </div>
         <div class="ui-block-d">
-            <button type="button" data-theme="a">=</button>
+            <button id="bequals" type="button" data-theme="a">=</button>
         </div>
     </fieldset>
+    <hr>
+    <button id="btests">Run Tests</button>
+    <div id="testresults"></div>
 </div>
 </body>
 </html>
