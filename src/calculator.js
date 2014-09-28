@@ -58,7 +58,7 @@ function display(buttonText) {
 }
 
 function clear() {
-    displayField.val("")
+    $('#display').val("")
 }
 
 function backSpace() {
@@ -71,10 +71,12 @@ function backSpace() {
 }
 
 function compute(val) {
+    var data = '';
     try {
-        var newDisplay = eval(val || displayField.val())
-        displayField.val(newDisplay)
+        data = eval(val || displayField.val())
     } catch (error) {
-        displayField.val("Error")
+        data = "Error";
     }
+    $('#display').val(data);
+    return data;
 }
