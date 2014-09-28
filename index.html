@@ -6,15 +6,20 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css"/>
     <link rel="apple-touch-icon" href="/calculator.png"/>
+    <link rel="stylesheet" href="src/mocha.css" />
     <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
     <script src="src/calculator.js"></script>
-    <script src="src/tests.js"></script>
+    <script src="src/auto-tests.js"></script>
+    <script src="src/scripts.js"></script>
     <style>
         body{ width: 320px;}
         .tests { padding: 10px 0 0 10px; border-bottom; 1px solid #666;}
         .correct {color: #009900; font-weight: bold;}
         .wrong {color: #FF0000; font-weight: bold;}
+        #mocha { display: none;}
+        #assertions-stats {display: none;}
+        .toggle-mocha { float: right; width: 300px; background: "green"; font-size: 12px; border: 1px solid #666; border-radius: 5px;}
     </style>
 </head>
 <body>
@@ -88,6 +93,45 @@
     <hr>
     <button id="btests">Run Tests</button>
     <div id="testresults"></div>
+    <hr>
+    <button id="bmocha">Toggle Mocha Tests</button>
+    <div id="mocha"></div>
+    <script src="src/chai.js"></script>
+    <script src="src/mocha.js"></script>
+    <script src="src/unit.js"></script>
+    <script>
+      mocha.setup('bdd');
+
+      var expect = chai.expect;
+    </script>
+    <script src="src/tests-unit.js"></script>
+    <script>
+      var runner = mocha.run();
+
+      runner.on('end', function() {
+
+        var total = unitjs.stats.total.assertions;
+        var details = '';
+
+        $('#mocha-stats li.assertions em').text(total);
+
+        for(var name in unitjs.stats.assertions) {
+          details +=
+            '<tr>' +
+              '<td>'+ name + '</td>' +
+              '<td><em>'+ unitjs.stats.assertions[name] +'</em></td>' +
+            '</tr>';
+        }
+
+
+        $('body').append('<div id="assertions-stats">' +
+          '<h2>Assertions stats</h2>' +
+          '<p>Total assertions executed: <em>' + total + '</em></p>' +
+          '<h3>Details:</h3><table>'+ details + '</table></div>'
+        );
+      });
+    </script>
+
 </div>
 </body>
 </html>

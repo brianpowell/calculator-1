@@ -15,7 +15,7 @@ function buttonPressed() {
     } else if (isBackSpace(buttonText)) {
         backSpace()
     } else if (isTests(buttonText)) {
-        runTests()
+        //do nothing...
     } else {
         display(buttonText)
     }
@@ -34,7 +34,22 @@ function isCompute(buttonText) {
 }
 
 function isTests(buttonText) {
-    return "Run Tests" == buttonText
+    
+    switch(buttonText) {
+        case "Run Tests":
+            runTests();
+            return true;
+        break;
+        case "Show Mocha Tests":
+        case "Hide Mocha Tests":
+        case "Toggle Mocha Tests":
+            toggleMocha();
+            return true;
+        break;
+        default: 
+            return false;
+        break;
+    }
 }
 
 function display(buttonText) {
@@ -55,9 +70,9 @@ function backSpace() {
     }
 }
 
-function compute() {
+function compute(val) {
     try {
-        var newDisplay = eval(displayField.val())
+        var newDisplay = eval(val || displayField.val())
         displayField.val(newDisplay)
     } catch (error) {
         displayField.val("Error")

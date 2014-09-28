@@ -43,6 +43,7 @@ function runTests() {
 	var result = "correct";
 
 	$.each(tests, function (i,v) {
+		$("#bclear").click();
 		var vals = v;
 		$.each(vals, function (ind,val) {
 			if(trip) {
