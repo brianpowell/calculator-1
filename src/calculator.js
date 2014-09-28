@@ -1,8 +1,7 @@
-var displayField;
 
 $(document).ready(function() {
-    displayField = $('#display')
     $("button").bind('click', buttonPressed);
+
 })
 
 function buttonPressed() {
@@ -36,7 +35,7 @@ function isCompute(buttonText) {
 function isTests(buttonText) {
     
     switch(buttonText) {
-        case "Run Tests":
+        case "Run Computation Tests":
             runTests();
             return true;
         break;
@@ -53,8 +52,8 @@ function isTests(buttonText) {
 }
 
 function display(buttonText) {
-    var newDisplay = displayField.val() + buttonText
-    displayField.val(newDisplay)
+    var newDisplay = $('#display').val() + buttonText
+    $('#display').val(newDisplay)
 }
 
 function clear() {
@@ -62,18 +61,18 @@ function clear() {
 }
 
 function backSpace() {
-    var display = displayField.val()
+    var display = $('#display').val()
 
     if (display.length > 0) {
         var newDisplay = display.substr(0, display.length - 1)
-        displayField.val(newDisplay)
+        $('#display').val(newDisplay)
     }
 }
 
 function compute(val) {
     var data = '';
     try {
-        data = eval(val || displayField.val())
+        data = eval(val || $('#display').val())
     } catch (error) {
         data = "Error";
     }

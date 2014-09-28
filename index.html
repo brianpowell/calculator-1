@@ -66,13 +66,13 @@
             <button id="bmultiply" type="button" data-theme="b">*</button>
         </div>
         <div class="ui-block-a hide">
-            <button type="button">(</button>
+            <button id="bpl" type="button">(</button>
         </div>
         <div class="ui-block-b">
             <button id="b0" type="button">0</button>
         </div>
         <div class="ui-block-c hide">
-            <button type="button">)</button>
+            <button id="bpr" type="button">)</button>
         </div>
         <div class="ui-block-d">
             <button id="bdivide" type="button" data-theme="b">/</button>
@@ -91,7 +91,7 @@
         </div>
     </fieldset>
     <hr>
-    <button id="btests">Run Tests</button>
+    <button id="btests">Run Computation Tests</button>
     <div id="testresults"></div>
     <hr>
     <button id="bmocha">Toggle Mocha Tests</button>
@@ -106,30 +106,33 @@
     </script>
     <script src="src/tests-unit.js"></script>
     <script>
-      var runner = mocha.run();
 
-      runner.on('end', function() {
+      $(document).ready(function() {
+              var runner = mocha.run();
 
-        var total = unitjs.stats.total.assertions;
-        var details = '';
+              runner.on('end', function() {
 
-        $('#mocha-stats li.assertions em').text(total);
+                var total = unitjs.stats.total.assertions;
+                var details = '';
 
-        for(var name in unitjs.stats.assertions) {
-          details +=
-            '<tr>' +
-              '<td>'+ name + '</td>' +
-              '<td><em>'+ unitjs.stats.assertions[name] +'</em></td>' +
-            '</tr>';
-        }
+                $('#mocha-stats li.assertions em').text(total);
+
+                for(var name in unitjs.stats.assertions) {
+                  details +=
+                    '<tr>' +
+                      '<td>'+ name + '</td>' +
+                      '<td><em>'+ unitjs.stats.assertions[name] +'</em></td>' +
+                    '</tr>';
+                }
 
 
-        $('body').append('<div id="assertions-stats">' +
-          '<h2>Assertions stats</h2>' +
-          '<p>Total assertions executed: <em>' + total + '</em></p>' +
-          '<h3>Details:</h3><table>'+ details + '</table></div>'
-        );
-      });
+                $('body').append('<div id="assertions-stats">' +
+                  '<h2>Assertions stats</h2>' +
+                  '<p>Total assertions executed: <em>' + total + '</em></p>' +
+                  '<h3>Details:</h3><table>'+ details + '</table></div>'
+                );
+              });
+        });
     </script>
 
 </div>
